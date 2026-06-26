@@ -1,0 +1,49 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* MENÚ */
+.menu {
+  background-color: #1f2937;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #38bdf8;
+}
+
+/* SECCIONES */
+section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+
+/* Colores para diferenciar */
+#inicio { background: #f3f4f6; }
+#quienes-somos { background: #e5e7eb; }
+#servicios { background: #d1d5db; }
+#contacto { background: #9ca3af; }
