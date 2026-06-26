@@ -3,44 +3,52 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, Arial, sans-serif;
+}
+
+/* ===== BODY ===== */
+body {
+  background: #0B0F1A;
+  color: #E5E7EB;
 }
 
 /* ===== HEADER ===== */
 .header {
-  background-color: #1f2937;
+  background: rgba(17, 24, 39, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.2);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-/* contenedor interno */
 .header__container {
   max-width: 1100px;
   margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 16px 20px;
 }
 
-/* logo */
+/* LOGO */
 .header__logo {
-  color: white;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 700;
+  background: linear-gradient(90deg, #7C3AED, #22D3EE);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* checkbox oculto */
+/* HAMBURGUESA */
 .header__checkbox {
   display: none;
 }
 
-/* botón hamburguesa */
 .header__toggle {
   display: none;
   font-size: 28px;
-  color: white;
+  color: #E5E7EB;
   cursor: pointer;
 }
 
@@ -48,18 +56,35 @@
 .nav__list {
   display: flex;
   list-style: none;
-  gap: 30px;
+  gap: 28px;
 }
 
 .nav__link {
   text-decoration: none;
-  color: white;
-  font-weight: bold;
-  transition: color 0.3s;
+  color: #E5E7EB;
+  font-weight: 500;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* efecto hover moderno */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #7C3AED, #22D3EE);
+  transition: 0.3s;
 }
 
 .nav__link:hover {
-  color: #38bdf8;
+  color: #22D3EE;
+}
+
+.nav__link:hover::after {
+  width: 100%;
 }
 
 /* ===== SECCIONES ===== */
@@ -68,13 +93,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
+  font-size: 42px;
 }
 
-#inicio { background: #f3f4f6; }
-#quienes { background: #e5e7eb; }
-#servicios { background: #d1d5db; }
-#contacto { background: #9ca3af; }
+/* fondos modernos suaves */
+#inicio { background: #0B0F1A; }
+#quienes { background: #0F172A; }
+#servicios { background: #111827; }
+#contacto { background: #0B0F1A; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
@@ -85,11 +111,12 @@
 
   .nav {
     position: absolute;
-    top: 60px;
+    top: 65px;
     left: 0;
     width: 100%;
-    background: #1f2937;
+    background: rgba(17, 24, 39, 0.95);
     display: none;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.2);
   }
 
   .nav__list {
@@ -99,11 +126,10 @@
 
   .nav__item {
     text-align: center;
-    padding: 15px 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 16px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
-  /* mostrar menú cuando checkbox está activo */
   .header__checkbox:checked ~ .header__container .nav {
     display: block;
   }
