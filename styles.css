@@ -193,3 +193,65 @@ body {
     max-width: 360px;
   }
 }
+
+
+.section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== BLOBS BASE ===== */
+.blob {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  filter: blur(80px);
+  opacity: 0.35;
+  z-index: 0;
+  border-radius: 50%;
+  animation: float 10s ease-in-out infinite;
+}
+
+/* ===== COLORES (flat moderno) ===== */
+.blob--1 {
+  background: #93C5FD; /* azul suave */
+  top: -100px;
+  left: -120px;
+  animation-duration: 12s;
+}
+
+.blob--2 {
+  background: #A5B4FC; /* violeta suave */
+  bottom: -120px;
+  right: -100px;
+  animation-duration: 14s;
+}
+
+.blob--3 {
+  background: #86EFAC; /* verde suave */
+  top: 40%;
+  left: 60%;
+  width: 300px;
+  height: 300px;
+  animation-duration: 16s;
+}
+
+/* ===== ANIMACIÓN FLUIDA ===== */
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -30px) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* ===== CONTENIDO ENCIMA ===== */
+.section__content,
+.section__image {
+  position: relative;
+  z-index: 2;
+}
