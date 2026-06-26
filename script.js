@@ -1,3 +1,4 @@
+import { supabase } from "./supabase.js";
 document.addEventListener("DOMContentLoaded", () => {
 
 
@@ -90,6 +91,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   });
+
+
+});
+
+
+const form = document.getElementById("uploadForm");
+
+
+form.addEventListener("submit", async (e)=>{
+
+e.preventDefault();
+
+
+const file = document.getElementById("pdfFile").files[0];
+
+
+if(!file){
+
+alert("Selecciona un PDF");
+
+return;
+
+}
+
+
+const {data,error}= await supabase
+.storage
+.from("documentos")
+.upload(
+file.name,
+file
+);
+
+
+
+if(error){
+
+console.log(error);
+
+alert("Error al subir archivo");
+
+
+}else{
+
+
+alert("PDF subido correctamente");
+
+
+console.log(data);
+
+
+}
 
 
 });

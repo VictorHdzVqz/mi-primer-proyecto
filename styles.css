@@ -277,3 +277,32 @@ body {
   position: relative;
   z-index: 2;
 }
+
+#uploadForm input,
+#uploadForm button{
+
+margin-top:15px;
+
+}
+
+
+#uploadForm button{
+
+background:#2563EB;
+color:white;
+border:none;
+
+padding:12px 25px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+
+#uploadForm button:hover{
+
+background:#1D4ED8;
+
+}
