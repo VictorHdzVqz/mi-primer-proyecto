@@ -1,4 +1,4 @@
-/* Reset básico */
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
@@ -6,35 +6,64 @@
   font-family: Arial, sans-serif;
 }
 
-/* MENÚ */
-.menu {
+/* ===== HEADER ===== */
+.header {
   background-color: #1f2937;
-  padding: 15px 0;
   position: sticky;
   top: 0;
+  z-index: 100;
 }
 
-.menu ul {
-  list-style: none;
+/* contenedor interno */
+.header__container {
+  max-width: 1100px;
+  margin: auto;
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
 }
 
-.menu a {
+/* logo */
+.header__logo {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* checkbox oculto */
+.header__checkbox {
+  display: none;
+}
+
+/* botón hamburguesa */
+.header__toggle {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== NAV ===== */
+.nav__list {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav__link {
   text-decoration: none;
   color: white;
-  font-size: 16px;
   font-weight: bold;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
-.menu a:hover {
+.nav__link:hover {
   color: #38bdf8;
 }
 
-/* SECCIONES */
-section {
+/* ===== SECCIONES ===== */
+.section {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -42,8 +71,40 @@ section {
   font-size: 40px;
 }
 
-/* Colores para diferenciar */
 #inicio { background: #f3f4f6; }
-#quienes-somos { background: #e5e7eb; }
+#quienes { background: #e5e7eb; }
 #servicios { background: #d1d5db; }
 #contacto { background: #9ca3af; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+
+  .header__toggle {
+    display: block;
+  }
+
+  .nav {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #1f2937;
+    display: none;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav__item {
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* mostrar menú cuando checkbox está activo */
+  .header__checkbox:checked ~ .header__container .nav {
+    display: block;
+  }
+}

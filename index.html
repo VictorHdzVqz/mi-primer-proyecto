@@ -1,44 +1,46 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <!DOCTYPE html>
-    <html lang="es">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Página</title>
+  <title>Menú BEM</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- MENÚ -->
-  <header>
-    <nav class="menu">
-      <ul>
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#quienes-somos">Quiénes somos</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+<header class="header">
+  
+  <!-- Checkbox para menú móvil -->
+  <input type="checkbox" id="nav-toggle" class="header__checkbox">
+
+  <div class="header__container">
+
+    <div class="header__logo">
+      MiWeb
+    </div>
+
+    <!-- Botón hamburguesa -->
+    <label for="nav-toggle" class="header__toggle">
+      ☰
+    </label>
+
+    <!-- NAV -->
+    <nav class="nav">
+      <ul class="nav__list">
+        <li class="nav__item"><a class="nav__link" href="#inicio">Inicio</a></li>
+        <li class="nav__item"><a class="nav__link" href="#quienes">Quiénes somos</a></li>
+        <li class="nav__item"><a class="nav__link" href="#servicios">Servicios</a></li>
+        <li class="nav__item"><a class="nav__link" href="#contacto">Contacto</a></li>
       </ul>
     </nav>
-  </header>
 
-  <!-- SECCIONES -->
-  <section id="inicio">
-    <h1>Inicio</h1>
-  </section>
+  </div>
+</header>
 
-  <section id="quienes-somos">
-    <h1>Quiénes somos</h1>
-  </section>
-
-  <section id="servicios">
-    <h1>Servicios</h1>
-  </section>
-
-  <section id="contacto">
-    <h1>Contacto</h1>
-  </section>
+<section id="inicio" class="section">Inicio</section>
+<section id="quienes" class="section">Quiénes somos</section>
+<section id="servicios" class="section">Servicios</section>
+<section id="contacto" class="section">Contacto</section>
 
 </body>
 </html>
