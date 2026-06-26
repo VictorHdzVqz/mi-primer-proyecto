@@ -5,13 +5,17 @@
   font-family: system-ui, Arial, sans-serif;
 }
 
-/* ===== BODY ===== */
+/* ======================
+   BODY
+====================== */
 body {
   background: #0B0F1A;
   color: #E5E7EB;
 }
 
-/* ===== HEADER ===== */
+/* ======================
+   HEADER
+====================== */
 .header {
   background: rgba(17, 24, 39, 0.85);
   backdrop-filter: blur(10px);
@@ -49,7 +53,9 @@ body {
   cursor: pointer;
 }
 
-/* ===== NAV ===== */
+/* ======================
+   NAV
+====================== */
 .nav__list {
   display: flex;
   list-style: none;
@@ -83,34 +89,71 @@ body {
   width: 100%;
 }
 
-/* ===== SECCIONES ===== */
+/* ======================
+   SECCIONES BASE
+====================== */
 .section {
   height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 42px;
-}
+  justify-content: center;
+  gap: 50px;
+  padding: 40px;
 
-/* fondos */
-#inicio { background: #0B0F1A; }
-#quienes { background: #0F172A; }
-#servicios { background: #111827; }
-#contacto { background: #0B0F1A; }
-
-/* ===== ANIMACIÓN JS ===== */
-.section {
   opacity: 0;
   transform: translateY(60px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+/* cuando entra en pantalla */
 .section.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ===== RESPONSIVE ===== */
+/* fondos por sección */
+#inicio { background: #0B0F1A; }
+#quienes { background: #0F172A; }
+#servicios { background: #111827; }
+#contacto { background: #0B0F1A; }
+
+/* ======================
+   CONTENIDO TEXTO
+====================== */
+.section__content {
+  max-width: 500px;
+}
+
+.section__content h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.section__content p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* ======================
+   IMÁGENES
+====================== */
+.section__image {
+  width: 450px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: transform 0.4s ease;
+}
+
+.section__image:hover {
+  transform: scale(1.05);
+}
+
+/* ======================
+   RESPONSIVE
+====================== */
 @media (max-width: 768px) {
 
   .header__toggle {
@@ -139,5 +182,15 @@ body {
 
   .header__checkbox:checked ~ .header__container .nav {
     display: block;
+  }
+
+  .section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .section__image {
+    width: 100%;
+    max-width: 350px;
   }
 }
