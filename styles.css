@@ -5,6 +5,10 @@
   font-family: system-ui, Arial, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ======================
    BODY (FLAT DESIGN)
 ====================== */
@@ -112,6 +116,8 @@ body {
   justify-content: center;
   gap: 60px;
   padding: 60px 40px;
+
+   scroll-margin-top: 80px; 
 
   opacity: 0;
   transform: translateY(40px);
