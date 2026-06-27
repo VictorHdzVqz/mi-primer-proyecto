@@ -1,5 +1,23 @@
-import { supabase } from "./supabase.js";
+// ==========================
+// CONEXIÓN SUPABASE
+// ==========================
 
+const supabaseUrl = "TU_URL_SUPABASE";
+
+const supabaseKey = "TU_PUBLISHABLE_KEY";
+
+
+const supabaseClient = supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
+
+
+
+
+// ==========================
+// CUANDO CARGA LA PAGINA
+// ==========================
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -8,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================
   // SCROLL SUAVE DEL MENU
   // ==========================
+
 
   document.querySelectorAll(".nav__link").forEach(link => {
 
@@ -71,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
+
   },{
 
 
@@ -95,10 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
   // ==========================
-  // NAVBAR TRANSPARENTE
+  // NAVBAR TRANSPARENTE AL SCROLL
   // ==========================
 
 
@@ -131,9 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
   // ==========================
   // SUBIR PDF A SUPABASE
   // ==========================
+
 
 
   const form = document.getElementById("uploadForm");
@@ -150,7 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-      const file = document.getElementById("pdfFile").files[0];
+      const file = document
+      .getElementById("pdfFile")
+      .files[0];
+
 
 
 
@@ -168,11 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-      const {data,error} = await supabase
+      const {data,error} = await supabaseClient
 
       .storage
 
-      .from("pdfs")
+      .from("documentos")
 
       .upload(
 
@@ -200,15 +223,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }else{
 
 
-        alert("PDF subido correctamente");
-
-
         console.log(data);
 
 
+        alert("PDF subido correctamente");
+
 
       }
-
 
 
 
@@ -217,8 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   }
-
-
 
 
 
