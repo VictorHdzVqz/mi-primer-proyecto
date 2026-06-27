@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       .storage
 
-      .from("documentos")
+      .from("pdfs")
 
       .upload(
 
