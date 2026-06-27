@@ -418,7 +418,7 @@ const {data,error} = await supabaseClient
 
 .storage
 
-.from("documentos")
+.from("pdfs")
 
 .upload(
 fileName,
