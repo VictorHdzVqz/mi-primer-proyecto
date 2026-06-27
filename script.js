@@ -2,15 +2,39 @@
 // CONEXIÓN SUPABASE
 // ==========================
 
-const supabaseUrl = "TU_URL_SUPABASE";
 
-const supabaseKey = "TU_PUBLISHABLE_KEY";
+const supabaseUrl = "https://pkmtoowukormgkujxaax.supabase.co";
 
 
-const supabaseClient = supabase.createClient(
-  supabaseUrl,
-  supabaseKey
-);
+const supabaseKey = "sb_publishable_pG9vEDCI5O_cY5-3ULdDjQ_tfs8dpPt";
+
+
+
+let supabaseClient;
+
+
+
+if(window.supabase){
+
+
+  supabaseClient = supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+  );
+
+
+}else{
+
+
+  console.error(
+    "Supabase no fue cargado correctamente"
+  );
+
+
+}
+
+
+
 
 
 
@@ -19,225 +43,486 @@ const supabaseClient = supabase.createClient(
 // CUANDO CARGA LA PAGINA
 // ==========================
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  // ==========================
-  // SCROLL SUAVE DEL MENU
-  // ==========================
 
 
-  document.querySelectorAll(".nav__link").forEach(link => {
+// ==========================
+// SCROLL SUAVE DEL MENU
+// ==========================
 
 
-    link.addEventListener("click", (e) => {
+const navLinks = document.querySelectorAll(".nav__link");
 
 
-      e.preventDefault();
 
+navLinks.forEach(link => {
 
-      const targetId = link.getAttribute("href");
 
 
-      const target = document.querySelector(targetId);
+link.addEventListener("click",(e)=>{
 
 
+e.preventDefault();
 
-      target.scrollIntoView({
 
-        behavior: "smooth",
 
-        block: "start"
+const section = document.querySelector(
+  link.getAttribute("href")
+);
 
-      });
 
 
-    });
+if(section){
 
 
-  });
 
+section.scrollIntoView({
 
+behavior:"smooth",
 
+block:"start"
 
+});
 
 
-  // ==========================
-  // ANIMACION DE SECCIONES
-  // ==========================
 
+}
 
-  const sections = document.querySelectorAll(".reveal");
 
 
 
-  const observer = new IntersectionObserver((entries)=>{
+// cerrar menu movil
 
+const checkbox = document.querySelector(
+".header__checkbox"
+);
 
-    entries.forEach(entry=>{
 
 
-      if(entry.isIntersecting){
+if(checkbox){
 
+checkbox.checked = false;
 
-        entry.target.classList.add("is-visible");
+}
 
 
-      }
 
+});
 
-    });
 
 
+});
 
-  },{
 
 
-    threshold:0.20
 
 
-  });
 
 
 
+// ==========================
+// ANIMACION REVEAL
+// ==========================
 
-  sections.forEach(section=>{
 
 
-    observer.observe(section);
+const sections = document.querySelectorAll(
+".reveal"
+);
 
 
-  });
 
 
+const observer = new IntersectionObserver(
+(entries)=>{
 
 
 
+entries.forEach(entry=>{
 
-  // ==========================
-  // NAVBAR TRANSPARENTE AL SCROLL
-  // ==========================
 
 
-  const header = document.querySelector(".header");
+if(entry.isIntersecting){
 
 
+entry.target.classList.add(
+"is-visible"
+);
 
-  window.addEventListener("scroll",()=>{
 
+}
 
-    if(window.scrollY > 50){
 
 
-      header.classList.add("header--scroll");
+});
 
 
-    }else{
 
+},
 
-      header.classList.remove("header--scroll");
 
+{
 
-    }
 
+threshold:0.20
 
-  });
 
+}
 
 
 
 
+);
 
 
-  // ==========================
-  // SUBIR PDF A SUPABASE
-  // ==========================
 
 
 
-  const form = document.getElementById("uploadForm");
 
+sections.forEach(section=>{
 
 
-  if(form){
+observer.observe(section);
 
 
-    form.addEventListener("submit", async(e)=>{
+});
 
 
-      e.preventDefault();
 
 
 
-      const file = document
-      .getElementById("pdfFile")
-      .files[0];
 
 
 
 
-      if(!file){
+// ==========================
+// NAVBAR TRANSPARENTE
+// ==========================
 
 
-        alert("Selecciona un PDF");
 
-        return;
+const header = document.querySelector(
+".header"
+);
 
 
-      }
 
+if(header){
 
 
 
+window.addEventListener(
+"scroll",
+()=>{
 
-      const {data,error} = await supabaseClient
 
-      .storage
+if(window.scrollY > 50){
 
-      .from("documentos")
 
-      .upload(
 
-        file.name,
+header.classList.add(
+"header--scroll"
+);
 
-        file
 
-      );
 
+}else{
 
 
 
+header.classList.remove(
+"header--scroll"
+);
 
 
-      if(error){
 
+}
 
-        console.log(error);
 
 
-        alert("Error al subir archivo");
+}
 
+);
 
 
-      }else{
 
+}
 
-        console.log(data);
 
 
-        alert("PDF subido correctamente");
 
 
-      }
 
 
 
 
-    });
+// ==========================
+// SUBIDA DE PDF
+// ==========================
 
 
-  }
+
+const form = document.getElementById(
+"uploadForm"
+);
+
+
+
+const inputFile = document.getElementById(
+"pdfFile"
+);
+
+
+
+
+
+if(form && inputFile){
+
+
+
+form.addEventListener(
+"submit",
+async(e)=>{
+
+
+
+e.preventDefault();
+
+
+
+
+const file = inputFile.files[0];
+
+
+
+
+
+if(!file){
+
+
+alert(
+"Selecciona un archivo PDF"
+);
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+// validar tipo
+
+
+if(file.type !== "application/pdf"){
+
+
+
+alert(
+"Solo se permiten archivos PDF"
+);
+
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+// limite 5MB
+
+
+const maxSize = 5 * 1024 * 1024;
+
+
+
+if(file.size > maxSize){
+
+
+
+alert(
+"El archivo no debe superar 5MB"
+);
+
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+const button = form.querySelector(
+"button"
+);
+
+
+
+
+
+button.textContent =
+"Subiendo...";
+
+
+
+button.disabled = true;
+
+
+
+
+
+
+
+
+
+// nombre único
+
+
+const fileName = 
+`${Date.now()}-${file.name}`;
+
+
+
+
+
+
+
+
+
+
+try{
+
+
+
+const {data,error} = await supabaseClient
+
+.storage
+
+.from("documentos")
+
+.upload(
+fileName,
+file
+);
+
+
+
+
+
+
+
+if(error){
+
+
+
+console.error(error);
+
+
+
+alert(
+"Error al subir archivo"
+);
+
+
+
+return;
+
+
+
+}
+
+
+
+
+
+
+
+alert(
+"PDF subido correctamente"
+);
+
+
+
+console.log(data);
+
+
+
+
+
+
+form.reset();
+
+
+
+
+
+
+}
+
+catch(error){
+
+
+
+console.error(error);
+
+
+
+alert(
+"Ocurrió un error"
+);
+
+
+
+}
+
+finally{
+
+
+
+button.textContent =
+"Subir PDF";
+
+
+
+button.disabled = false;
+
+
+
+}
+
+
+
+
+
+}
+
+
+
+);
+
+
+
+}
 
 
 
