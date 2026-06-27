@@ -1,5 +1,8 @@
 import { supabase } from "./supabase.js";
+
+
 document.addEventListener("DOMContentLoaded", () => {
+
 
 
   // ==========================
@@ -8,24 +11,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".nav__link").forEach(link => {
 
+
     link.addEventListener("click", (e) => {
+
 
       e.preventDefault();
 
+
       const targetId = link.getAttribute("href");
+
 
       const target = document.querySelector(targetId);
 
 
+
       target.scrollIntoView({
+
         behavior: "smooth",
+
         block: "start"
+
       });
 
 
     });
 
+
   });
+
+
+
 
 
 
@@ -33,18 +48,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // ANIMACION DE SECCIONES
   // ==========================
 
+
   const sections = document.querySelectorAll(".reveal");
+
 
 
   const observer = new IntersectionObserver((entries)=>{
 
 
-    entries.forEach(entry => {
+    entries.forEach(entry=>{
 
 
       if(entry.isIntersecting){
 
+
         entry.target.classList.add("is-visible");
+
 
       }
 
@@ -54,17 +73,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   },{
 
-    threshold: 0.20
+
+    threshold:0.20
+
 
   });
 
 
 
-  sections.forEach(section => {
+
+  sections.forEach(section=>{
+
 
     observer.observe(section);
 
+
   });
+
+
+
+
 
 
 
@@ -73,7 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // NAVBAR TRANSPARENTE
   // ==========================
 
+
   const header = document.querySelector(".header");
+
 
 
   window.addEventListener("scroll",()=>{
@@ -81,11 +111,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(window.scrollY > 50){
 
+
       header.classList.add("header--scroll");
+
 
     }else{
 
+
       header.classList.remove("header--scroll");
+
 
     }
 
@@ -93,56 +127,99 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-});
-
-
-const form = document.getElementById("uploadForm");
-
-
-form.addEventListener("submit", async (e)=>{
-
-e.preventDefault();
-
-
-const file = document.getElementById("pdfFile").files[0];
-
-
-if(!file){
-
-alert("Selecciona un PDF");
-
-return;
-
-}
-
-
-const {data,error}= await supabase
-.storage
-.from("documentos")
-.upload(
-file.name,
-file
-);
 
 
 
-if(error){
 
-console.log(error);
-
-alert("Error al subir archivo");
-
-
-}else{
+  // ==========================
+  // SUBIR PDF A SUPABASE
+  // ==========================
 
 
-alert("PDF subido correctamente");
+  const form = document.getElementById("uploadForm");
 
 
-console.log(data);
+
+  if(form){
 
 
-}
+    form.addEventListener("submit", async(e)=>{
+
+
+      e.preventDefault();
+
+
+
+      const file = document.getElementById("pdfFile").files[0];
+
+
+
+      if(!file){
+
+
+        alert("Selecciona un PDF");
+
+        return;
+
+
+      }
+
+
+
+
+
+      const {data,error} = await supabase
+
+      .storage
+
+      .from("documentos")
+
+      .upload(
+
+        file.name,
+
+        file
+
+      );
+
+
+
+
+
+
+      if(error){
+
+
+        console.log(error);
+
+
+        alert("Error al subir archivo");
+
+
+
+      }else{
+
+
+        alert("PDF subido correctamente");
+
+
+        console.log(data);
+
+
+
+      }
+
+
+
+
+
+    });
+
+
+  }
+
+
+
 
 
 });
